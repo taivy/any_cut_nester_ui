@@ -1,7 +1,6 @@
 from os import environ, path
 
 from flask import Flask, render_template, request, send_from_directory
-from flask_dropzone import Dropzone
 
 from app.utils import get_results, process_files
 from app.forms import NestRequestForm
@@ -15,21 +14,18 @@ else:
     app.config.from_object('app.config.DevConfig')
 
 
-dropzone = Dropzone(app)
-
-
 @app.route('/', methods=['get', 'post'])
 def index():
     form = NestRequestForm()
 
     print("request.method", request.method)
     if request.method == 'POST':
+
         if form.validate_on_submit():
             items_quantity = form.items_quantity.data
             bin_size_x = form.bin_size_x.data
             bin_size_y = form.bin_size_y.data
             timeout = form.timeout.data
-
         try:
             file_list = process_files(request, app)
         except Exception as err:

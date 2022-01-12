@@ -3,8 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Nester Interface</title>
-        {{ dropzone.load_css() }}
-        {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }}
     </head>
     <body>
         <h1>Nesting service</h1>
@@ -19,17 +17,14 @@
                     {% endfor %}
                 </p>
             {% endfor %}
+
+            <div>
+                <p>Upload DXF files</p>
+                <input type="file" name="file[]" multiple="">
+            </div>
+
+            <button type="submit" id="submit-button" class="btn btn-primary">Submit</button>
         </form>
 
-        <div>
-            <p>Upload DXF files</p>
-            {{ dropzone.create(action='index') }}
-        </div>
-
-        <button type="submit" id="submit-button" class="btn btn-primary">Submit</button>
-
-        {{ dropzone.load_js() }}
-        {{ dropzone.config(custom_init='dz = this;document.getElementById("submit-button").addEventListener("click", function handler(e) {dz.processQueue();});',
-                 custom_options='autoProcessQueue: false, addRemoveLinks: false,') }}
     </body>
 </html>

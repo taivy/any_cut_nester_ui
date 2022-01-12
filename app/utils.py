@@ -39,13 +39,15 @@ def get_results(file_list, items_quantity, bin_size_x, bin_size_y, timeout):
         'margin': 5,
         'timeout': timeout
     }
+    print("data", data)
     response = requests.post(api_url, json=data, timeout=Config.API_REQUEST_TIMEOUT)
+    print("response", response)
     return response
 
 
 def process_files(request, app):
     file_list = []
-    for f in request.files.itervalues():
+    for f in request.files.values():
         file_path = path.join(app.config['UPLOADED_PATH'], f.filename)
         f.save(file_path)
 
