@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Nester Interface</title>
+        <link rel="stylesheet" type="text/css" href='{{ url_for('static', filename='index.css') }}' />
     </head>
     <body>
         <h1>Nesting service</h1>
@@ -10,16 +11,18 @@
         <form action="" method="post" enctype="multipart/form-data">
             {{ form.csrf_token() }}
             {% for field in form if field.name != "csrf_token" and field.name != "submit" %}
-                <p>{{ field.label() }}</p>
-                <p>{{ field }}
-                    {% for error in field.errors %}
-                    {{ error }}
-                    {% endfor %}
-                </p>
+                <div class="form-field">
+                    <p class="form-field__description">{{ field.label() }}</p>
+                    <div>{{ field }}
+                        {% for error in field.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
             {% endfor %}
 
-            <div>
-                <p>Upload DXF files</p>
+            <div class="form-field">
+                <p class="form-field__description">Upload DXF files</p>
                 <input type="file" name="file[]" multiple="">
             </div>
 

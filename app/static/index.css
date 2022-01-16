@@ -1,0 +1,19 @@
+.form-field {
+    margin-top: 17px;
+    margin-bottom: 5px;
+}
+
+.form-field input {
+    margin: 0;
+}
+
+.form-field__description {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+#submit-button {
+    margin-top: 20px;
+    font-size: 12pt;
+    padding: 5px 15px;
+}
