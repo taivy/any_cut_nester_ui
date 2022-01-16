@@ -40,6 +40,7 @@ def get_results(file_list, items_quantity, bin_size_x, bin_size_y, timeout):
         'margin': 5,
         'timeout': timeout
     }
+    print(data)
     response = requests.post(api_url, json=data, timeout=Config.API_REQUEST_TIMEOUT)
     if response.status_code == 200:
         encoded_img = str(base64.b64encode(response.content))[2:-1]
@@ -48,7 +49,7 @@ def get_results(file_list, items_quantity, bin_size_x, bin_size_y, timeout):
 
 def process_files(request, app):
     file_list = []
-    for f in request.files.values():
+    for f in request.files.getlist("file[]"):
         file_path = path.join(app.config['UPLOAD_FOLDER'], f.filename)
         f.save(file_path)
 
