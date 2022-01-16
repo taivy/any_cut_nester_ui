@@ -1,3 +1,4 @@
+import base64
 import requests
 from os import path
 
@@ -44,8 +45,10 @@ def get_results(file_list, items_quantity, bin_size_x, bin_size_y, timeout):
     print("response", response)
     print("response", response.status_code)
     print("response", response.text)
-    return response
-
+    if response.status_code == 200:
+        encoded_img = base64.b64encode(response.raw)
+        return encoded_img
+    return None
 
 def process_files(request, app):
     file_list = []
