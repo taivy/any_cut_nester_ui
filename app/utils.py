@@ -40,13 +40,9 @@ def get_results(file_list, items_quantity, bin_size_x, bin_size_y, timeout):
         'margin': 5,
         'timeout': timeout
     }
-    print("data", data)
     response = requests.post(api_url, json=data, timeout=Config.API_REQUEST_TIMEOUT)
-    print("response", response)
-    print("response", response.status_code)
-    print("response", response.text)
     if response.status_code == 200:
-        encoded_img = base64.b64encode(response.raw)
+        encoded_img = str(base64.b64encode(response.content))[2:-1]
         return encoded_img
     return None
 
