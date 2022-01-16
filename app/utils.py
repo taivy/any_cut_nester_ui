@@ -42,13 +42,15 @@ def get_results(file_list, items_quantity, bin_size_x, bin_size_y, timeout):
     print("data", data)
     response = requests.post(api_url, json=data, timeout=Config.API_REQUEST_TIMEOUT)
     print("response", response)
+    print("response", response.status_code)
+    print("response", response.text)
     return response
 
 
 def process_files(request, app):
     file_list = []
     for f in request.files.values():
-        file_path = path.join(app.config['UPLOADED_PATH'], f.filename)
+        file_path = path.join(app.config['UPLOAD_FOLDER'], f.filename)
         f.save(file_path)
 
         url = f"{app.config['APP_BASE_URL']}/uploads/{f.filename}"

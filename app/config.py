@@ -5,7 +5,7 @@ basedir = path.abspath(path.dirname(__file__))
 
 class Config:
     SECRET_KEY = environ.get('SECRET_KEY')
-    UPLOADED_PATH = path.join(basedir, 'uploads')
+    UPLOAD_FOLDER = path.join(basedir, 'uploads')
     BASE_URL = 'https://functions.yandexcloud.net/d4e4kbm7oeqfaj0ebhps/'
     DROPZONE_UPLOAD_MULTIPLE = True
     DROPZONE_ALLOWED_FILE_CUSTOM = True
