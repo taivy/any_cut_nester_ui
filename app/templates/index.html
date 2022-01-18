@@ -4,6 +4,17 @@
         <meta charset="UTF-8">
         <title>Nester Interface</title>
         <link rel="stylesheet" type="text/css" href='{{ url_for('static', filename='index.css') }}' />
+        <script>
+updateList = function() {
+    var input = document.getElementById('files');
+    var output = document.getElementById('fileList');
+    var children = "";
+    for (var i = 0; i < input.files.length; ++i) {
+        children += '<li class="uploaded-file__item">' + (i + 1) + '. ' + input.files.item(i).name + '</li>';
+    }
+    output.innerHTML = '<ul class="uploaded-files-list">'+children+'</ul>';
+}
+        </script>
     </head>
     <body>
         <h1>Nesting service</h1>
@@ -23,7 +34,9 @@
 
             <div class="form-field">
                 <p class="form-field__description">Upload DXF files</p>
-                <input type="file" name="file[]" multiple="">
+                <input type="file" id="files" name="file[]" multiple="" onchange="javascript:updateList()">
+                <p>Selected files:</p>
+                <div id="fileList"></div>
             </div>
 
             <button type="submit" id="submit-button" class="btn btn-primary">Submit</button>

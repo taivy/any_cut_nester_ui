@@ -12,6 +12,10 @@
     margin-bottom: 6px;
 }
 
+.uploaded-files-list {
+    margin-top: 5px;
+}
+
 #submit-button {
     margin-top: 20px;
     font-size: 12pt;
