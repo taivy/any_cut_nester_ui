@@ -14,12 +14,40 @@ updateList = function() {
     }
     output.innerHTML = '<ul class="uploaded-files-list">'+children+'</ul>';
 }
+
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var display = document.querySelector('#timeout__text');
+    document.querySelector("#nesting-form").addEventListener("submit", function(e){
+        e.preventDefault();
+        document.getElementById('timeout-block').style.setProperty('display', 'block');
+        console.log("set block")
+        var timeout = document.querySelector('input[name=timeout]').value;
+        startTimer(timeout, display);
+    });
+};
         </script>
     </head>
     <body>
         <h1>Nesting service</h1>
         <h2>Find nesting</h2>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form id="nesting-form" action="" method="post" enctype="multipart/form-data">
             {{ form.csrf_token() }}
             {% for field in form if field.name != "csrf_token" and field.name != "submit" %}
                 <div class="form-field">
@@ -40,6 +68,10 @@ updateList = function() {
             </div>
 
             <button type="submit" id="submit-button" class="btn btn-primary">Submit</button>
+            <div id="timeout-block" style="display: none;">
+                <span id="timeout__text"></span>
+            </div>
+
         </form>
 
     </body>
